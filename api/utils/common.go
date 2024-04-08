@@ -2,8 +2,10 @@ package utils
 
 import (
 	"bytes"
+	"embed"
 	"encoding/json"
 	"fmt"
+	"github.com/gin-contrib/static"
 	"github.com/lionsoul2014/ip2region/binding/golang/xdb"
 	"github.com/nfnt/resize"
 	"github.com/skip2/go-qrcode"
@@ -12,6 +14,8 @@ import (
 	"image/draw"
 	"image/jpeg"
 	"io"
+	"io/fs"
+	"net/http"
 	"reflect"
 	"strconv"
 	"strings"
@@ -202,4 +206,23 @@ func overlayLogo(qrImage, logoImage image.Image) image.Image {
 	draw.Draw(combinedImage, logoImage.Bounds().Add(image.Pt(offsetX, offsetY)), logoImage, image.Point{}, draw.Over)
 
 	return combinedImage
+}
+
+type embedFileSystem struct {
+	http.FileSystem
+}
+
+func (e embedFileSystem) Exists(prefix string, path string) bool {
+	_, err := e.Open(path)
+	return err == nil
+}
+
+func EmbedFolder(fsEmbed embed.FS, targetPath string) static.ServeFileSystem {
+	efs, err := fs.Sub(fsEmbed, targetPath)
+	if err != nil {
+		panic(err)
+	}
+	return embedFileSystem{
+		FileSystem: http.FS(efs),
+	}
 }

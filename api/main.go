@@ -15,13 +15,20 @@ import (
 	"chatplus/service/sms"
 	"chatplus/service/wx"
 	"chatplus/store"
+	"chatplus/utils"
 	"context"
 	"embed"
+	"fmt"
+	"github.com/gin-contrib/gzip"
+	"github.com/gin-contrib/static"
+	"github.com/gin-gonic/gin"
 	"io"
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
 	"strconv"
+	"strings"
 	"syscall"
 	"time"
 
@@ -36,6 +43,9 @@ var logger = logger2.GetLogger()
 
 //go:embed res
 var xdbFS embed.FS
+
+//go:embed web/dist/*
+var buildFS embed.FS
 
 // AppLifecycle 应用程序生命周期
 type AppLifecycle struct {
@@ -416,6 +426,23 @@ func main() {
 		fx.Invoke(func(s *core.AppServer, h *admin.PowerLogHandler) {
 			group := s.Engine.Group("/api/admin/powerLog/")
 			group.POST("list", h.List)
+		}),
+		fx.Invoke(func(s *core.AppServer) {
+			indexPageData, err := buildFS.ReadFile("web/dist/index.html")
+			if err != nil {
+				fmt.Printf("index.html does not exist: %v\n", err)
+			}
+			s.Engine.Use(gzip.Gzip(gzip.DefaultCompression))
+			s.Engine.Use(static.Serve("/", utils.EmbedFolder(buildFS, "web/dist")))
+			s.Engine.NoRoute(func(c *gin.Context) {
+				if strings.HasPrefix(c.Request.RequestURI, "/v1") || strings.HasPrefix(c.Request.RequestURI, "/api") {
+					// controller.RelayNotFound(c)
+					fmt.Printf("no relay\n")
+					return
+				}
+				c.Header("Cache-Control", "no-cache")
+				c.Data(http.StatusOK, "text/html; charset=utf-8", indexPageData)
+			})
 		}),
 		fx.Invoke(func(s *core.AppServer, db *gorm.DB) {
 			err := s.Run(db)

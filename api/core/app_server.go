@@ -225,6 +225,19 @@ func needLogin(c *gin.Context) bool {
 		strings.HasPrefix(c.Request.URL.Path, "/static/") {
 		return false
 	}
+	if c.Request.URL.Path == "/" ||
+		c.Request.URL.Path == "/index.html" ||
+		strings.HasPrefix(c.Request.URL.Path, "/js/") ||
+		strings.HasPrefix(c.Request.URL.Path, "/css/") ||
+		strings.HasPrefix(c.Request.URL.Path, "/fonts/") ||
+		strings.HasPrefix(c.Request.URL.Path, "/img/") ||
+		strings.HasPrefix(c.Request.URL.Path, "/images/") ||
+		strings.HasPrefix(c.Request.URL.Path, "/chat") ||
+		strings.HasPrefix(c.Request.URL.Path, "/admin") ||
+		strings.HasPrefix(c.Request.URL.Path, "/images/") ||
+		c.Request.URL.Path == "/favicon.ico" {
+		return false
+	}
 	return true
 }
 
