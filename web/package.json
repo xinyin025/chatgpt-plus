@@ -22,6 +22,8 @@
     "markdown-it": "^13.0.1",
     "markdown-it-latex2img": "^0.0.6",
     "markdown-it-mathjax": "^2.0.0",
+    "markmap": "^0.6.1",
+    "markmap-lib": "^0.17.0",
     "md-editor-v3": "^2.2.1",
     "pinia": "^2.1.4",
     "qrcode": "^1.5.3",

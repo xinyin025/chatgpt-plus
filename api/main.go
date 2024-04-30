@@ -132,6 +132,7 @@ func main() {
 		fx.Provide(handler.NewProductHandler),
 		fx.Provide(handler.NewConfigHandler),
 		fx.Provide(handler.NewPowerLogHandler),
+		fx.Provide(handler.NewMarkMapHandler),
 
 		fx.Provide(admin.NewConfigHandler),
 		fx.Provide(admin.NewAdminHandler),
@@ -269,6 +270,10 @@ func main() {
 			group.GET("imgWall", h.ImgWall)
 			group.POST("remove", h.Remove)
 			group.POST("publish", h.Publish)
+		}),
+		fx.Invoke(func(s *core.AppServer, h *handler.MarkMapHandler) {
+			group := s.Engine.Group("/api/markMap")
+			group.Any("client", h.Client)
 		}),
 		fx.Invoke(func(s *core.AppServer, h *handler.ConfigHandler) {
 			group := s.Engine.Group("/api/config/")

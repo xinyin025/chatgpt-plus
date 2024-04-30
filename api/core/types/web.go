@@ -22,6 +22,7 @@ const (
 	WsMiddle = WsMsgType("middle")
 	WsEnd    = WsMsgType("end")
 	WsMjImg  = WsMsgType("mj")
+	WsErr    = WsMsgType("error")
 )
 
 type BizCode int

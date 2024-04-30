@@ -27,6 +27,12 @@ const routes = [
                 component: () => import('@/views/ImageSd.vue'),
             },
             {
+                name: 'image-markmap',
+                path: '/markmap',
+                meta: {title: '思维导图'},
+                component: () => import('@/views/MarkMap.vue'),
+            },
+            {
                 name: 'member',
                 path: '/member',
                 meta: {title: '会员充值中心'},
