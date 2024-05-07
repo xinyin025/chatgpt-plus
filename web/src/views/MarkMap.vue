@@ -6,7 +6,7 @@
             <h2>思维导图创作中心</h2>
   
             <div class="mark-map-params" :style="{ height: leftBoxHeight + 'px' }">
-              <el-form label-width="80px" label-position="left">
+              <el-form label-width="80px" label-position="left" class="el-form el-form--default el-form--label-left">
                 <div class="param-line">
                   你的需求？
                 </div>
@@ -44,7 +44,7 @@
                 </div>
   
                 <div class="param-line">
-                  <el-button color="#47fff1" :dark="false" round @click="generateAI" :loading="loading">
+                  <el-button class="el-button is-round" color="#47fff1" :dark="false" round @click="generateAI" :loading="loading">
                     智能生成思维导图
                   </el-button>
                 </div>
@@ -110,15 +110,13 @@
   const rightBoxHeight = ref(window.innerHeight - 85)
   
   const prompt = ref("")
-  const text = ref(`# Geek-AI 助手
-  
-  - 完整的开源系统，前端应用和后台管理系统皆可开箱即用。
+  const text = ref(`# 394959-AI
+
   - 基于 Websocket 实现，完美的打字机体验。
   - 内置了各种预训练好的角色应用,轻松满足你的各种聊天和应用需求。
-  - 支持 OPenAI，Azure，文心一言，讯飞星火，清华 ChatGLM等多个大语言模型。
+  - 支持 OpenAI，Azure，文心一言，讯飞星火，清华 ChatGLM等多个大语言模型。
   - 支持 MidJourney / Stable Diffusion AI 绘画集成，开箱即用。
   - 支持使用个人微信二维码作为充值收费的支付渠道，无需企业支付通道。
-  - 已集成支付宝支付功能，微信支付，支持多种会员套餐和点卡购买功能。
   - 集成插件 API 功能，可结合大语言模型的 function 功能开发各种强大的插件。
   `)
   const md = require('markdown-it')({breaks: true});
@@ -269,6 +267,8 @@
         connect(userId)
       }
     });
+
+    //socket.value = _socket;
   }
   
   const generate = () => {
