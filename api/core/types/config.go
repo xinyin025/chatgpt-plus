@@ -20,6 +20,7 @@ type AppConfig struct {
 	MjProxyConfigs []MjProxyConfig         // MJ proxy config
 	MjPlusConfigs  []MjPlusConfig          // MJ plus config
 	WeChatBot      bool                    // 是否启用微信机器人
+	SiteName       string                  // 网站名称，用户注册时，将会使用该名称作为前缀
 	SdConfigs      []StableDiffusionConfig // sd AI draw service pool
 
 	XXLConfig     XXLConfig

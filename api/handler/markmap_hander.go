@@ -43,8 +43,15 @@ func (h *MarkMapHandler) Client(c *gin.Context) {
 	modelId := h.GetInt(c, "model_id", 0)
 	userId := h.GetInt(c, "user_id", 0)
 
+	if userId == 0 {
+		logger.Info("Invalid user ID")
+		c.Abort()
+		return
+	}
+
 	client := types.NewWsClient(ws)
 	h.clients.Put(userId, client)
+	logger.Infof("New websocket connected, IP: %s, UserId: %d", c.ClientIP(), userId)
 	go func() {
 		for {
 			_, msg, err := client.Receive()

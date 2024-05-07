@@ -39,7 +39,7 @@
           </div>
         </div>
 
-        <div class="tool-box">
+        <!-- <div class="tool-box">
           <el-dropdown :hide-on-click="true" class="user-info" trigger="click" v-if="isLogin">
                         <span class="el-dropdown-link">
                           <el-image :src="loginUser.avatar"/>
@@ -77,7 +77,7 @@
               </el-dropdown-menu>
             </template>
           </el-dropdown>
-        </div>
+        </div> -->
       </el-aside>
       <el-main v-loading="loading" element-loading-background="rgba(122, 122, 122, 0.3)">
         <div class="chat-head">
@@ -123,7 +123,7 @@
               <span>导出会话</span>
             </el-button>
 
-            <el-tooltip class="box-item"
+            <!-- <el-tooltip class="box-item"
                         effect="dark"
                         content="部署文档"
                         placement="bottom">
@@ -143,7 +143,7 @@
                   <i class="iconfont icon-github"></i>
                 </el-button>
               </a>
-            </el-tooltip>
+            </el-tooltip> -->
           </div>
         </div>
 

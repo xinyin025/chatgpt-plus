@@ -5,6 +5,7 @@ StaticDir = "./static" # 静态资源的目录
 StaticUrl = "/static" # 静态资源访问 URL
 AesEncryptKey = ""
 WeChatBot = false
+SiteName = "" # 网站名称，目前的用途是用于注册用户是作为用户名的前缀
 
 [Session]
   SecretKey = "azyehq3ivunjhbntz78isj00i4hz2mt9xtddysfucxakadq4qbfrt0b7q3lnvg80" # 注意：这个是 JWT Token 授权密钥，生产环境请务必更换
