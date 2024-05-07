@@ -215,6 +215,7 @@ func needLogin(c *gin.Context) bool {
 		c.Request.URL.Path == "/api/invite/hits" ||
 		c.Request.URL.Path == "/api/sd/imgWall" ||
 		c.Request.URL.Path == "/api/sd/client" ||
+		c.Request.URL.Path == "/api/markMap/client" ||
 		c.Request.URL.Path == "/api/config/get" ||
 		c.Request.URL.Path == "/api/product/list" ||
 		c.Request.URL.Path == "/api/menu/list" ||
