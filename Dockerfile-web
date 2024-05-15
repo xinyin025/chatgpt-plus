@@ -1,0 +1,18 @@
+FROM node:18 as builder
+
+WORKDIR /build
+COPY ./web .
+
+# WORKDIR /build/web
+RUN npm install && npm run build
+
+FROM nginx:1.20.2
+
+MAINTAINER xinyin025<xinyin025@163.com>
+
+WORKDIR /var/www/app
+COPY --from=builder /build/dist /var/www/app/dist
+
+EXPOSE 80
+EXPOSE 443
+EXPOSE 8080

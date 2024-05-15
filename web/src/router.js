@@ -11,7 +11,7 @@ const routes = [
             {
                 name: 'chat',
                 path: '/chat',
-                meta: {title: '创作中心'},
+                meta: {title: '对话'},
                 component: () => import('@/views/ChatPlus.vue'),
             },
             {
@@ -23,7 +23,7 @@ const routes = [
             {
                 name: 'image-sd',
                 path: '/sd',
-                meta: {title: 'stable diffusion 绘画中心'},
+                meta: {title: 'Stable Diffusion 绘画中心'},
                 component: () => import('@/views/ImageSd.vue'),
             },
             {
@@ -86,7 +86,7 @@ const routes = [
     {
         path: '/admin/login',
         name: 'admin-login',
-        meta: {title: 'ChatPuls 控制台登录'},
+        meta: {title: '394959AI-控制台登录'},
         component: () => import('@/views/admin/Login.vue'),
     },
     {
@@ -94,7 +94,7 @@ const routes = [
         path: '/admin',
         redirect: '/admin/dashboard',
         component: () => import("@/views/admin/Home.vue"),
-        meta: {title: 'ChatPuls 管理后台'},
+        meta: {title: '394959AI-管理后台'},
         children: [
             {
                 path: '/admin/dashboard',
@@ -187,7 +187,7 @@ const routes = [
     {
         name: 'mobile',
         path: '/mobile',
-        meta: {title: 'Geek-AI v4.0'},
+        meta: {title: '394959-AI'},
         component: () => import('@/views/mobile/Home.vue'),
         redirect: '/mobile/chat',
         children: [

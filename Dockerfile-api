@@ -1,0 +1,30 @@
+FROM golang:1.19.13 AS builder
+
+MAINTAINER xinyin025<xinyin025@163.com>
+
+ENV GO111MODULE=on \
+    CGO_ENABLED=1 \
+    GOOS=linux
+
+WORKDIR /build
+COPY ./api .
+
+#ADD go.mod go.sum ./
+RUN go mod download
+
+
+#RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/chatgpt-plus-linux main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o bin/chatgpt-plus-linux main.go
+
+
+FROM alpine:3.18.2
+
+MAINTAINER xinyin025<xinyin025@163.com>
+
+WORKDIR /var/www/app/
+COPY --from=builder /build/bin/chatgpt-plus-linux .
+
+EXPOSE 5678
+
+# 容器启动时执行的命令
+CMD ["./chatgpt-plus-linux"]
